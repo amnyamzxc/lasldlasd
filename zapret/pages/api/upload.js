@@ -9,7 +9,7 @@ export const config = {
   },
 };
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'secret123';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'of2RdGc]upVunG7*';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
