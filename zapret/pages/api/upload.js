@@ -9,12 +9,11 @@ export const config = {
   },
 };
 
-// Простой пароль для защиты (лучше вынести в переменные окружения Vercel)
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'secret123';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405.json({ error: 'Method not allowed' }));
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const form = formidable({ multiples: false });
@@ -37,12 +36,11 @@ export default async function handler(req, res) {
     }
 
     try {
-      // Отправка файла в Telegram-канал или личку админу, чтобы обойти ограничение диска Vercel
       const botToken = process.env.TG_BOT_TOKEN;
       const chatId = process.env.TG_CHAT_ID;
 
       if (!botToken || !chatId) {
-        return res.status(500).json({ error: 'Не настроены переменные Telegram (TG_BOT_TOKEN, TG_CHAT_ID)' });
+        return res.status(500).json({ error: 'Не настроены переменные Telegram' });
       }
 
       const fileStream = fs.createReadStream(uploadedFile.filepath);
@@ -60,7 +58,6 @@ export default async function handler(req, res) {
         throw new Error('Ошибка Telegram API');
       }
 
-      // Получаем прямую ссылку на скачивание файла из Telegram
       const fileId = tgData.result.document.file_id;
       const fileMetaRes = await fetch(`https://api.telegram.org/bot${botToken}/getFile?file_id=${fileId}`);
       const fileMetaData = await fileMetaRes.json();
