@@ -1,0 +1,18 @@
+{
+  "name": "zapret-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "formidable": "^3.5.2",
+    "next": "latest",
+    "node-fetch": "^3.3.2",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
